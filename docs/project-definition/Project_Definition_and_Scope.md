@@ -154,13 +154,26 @@ The primary objectives of this project are to:
 
 ---
 
-# Success Criteria
 
-The project will be considered successful if it:
+## Wireframes
 
-* Meets all functional requirements.
-* Demonstrates a complete adoption workflow.
-* Stores and retrieves data correctly from the database.
-* Provides a responsive and intuitive user interface.
-* Follows the planned Agile workflow.
-* Is fully documented and maintained in the GitHub repository.
+These wireframes were created during the planning and design phase of the project.
+
+### Home Page
+![Home](figma/home_wireframe.png)
+
+### Browse Pets
+![Browse Pets](figma/brows_pet_wireframe.png)
+
+### Pet Details
+![Pet Details](figma/buddy_wireframe.png)
+
+### Admin Dashboard
+![Admin Dashboard](figma/admin_dashboard_wireframe.png)
+
+### Admin Manage Pets
+![Admin pets management system](figma/admin_manage_pets_wireframe.png)
+
+### Admin Adoption of Pet
+![Admin pet adoption system](figma/admin_adoption_pet_wireframe.png)
+

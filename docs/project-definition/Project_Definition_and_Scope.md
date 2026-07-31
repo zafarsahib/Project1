@@ -160,20 +160,20 @@ The primary objectives of this project are to:
 These wireframes were created during the planning and design phase of the project.
 
 ### Home Page
-![Home](figma/home_wireframe.png)
+![Home](docs/figma/home_wireframe.png)
 
 ### Browse Pets
-![Browse Pets](figma/brows_pet_wireframe.png)
+![Browse Pets](docs/figma/brows_pet_wireframe.png)
 
 ### Pet Details
-![Pet Details](figma/buddy_wireframe.png)
+![Pet Details](docs/figma/buddy_wireframe.png)
 
 ### Admin Dashboard
-![Admin Dashboard](figma/admin_dashboard_wireframe.png)
+![Admin Dashboard](docs/figma/admin_dashboard_wireframe.png)
 
 ### Admin Manage Pets
-![Admin pets management system](figma/admin_manage_pets_wireframe.png)
+![Admin pets management system](docs/figma/admin_manage_pets_wireframe.png)
 
 ### Admin Adoption of Pet
-![Admin pet adoption system](figma/admin_adoption_pet_wireframe.png)
+![Admin pet adoption system](docs/figma/admin_adoption_pet_wireframe.png)
 

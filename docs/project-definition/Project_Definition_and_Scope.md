@@ -178,3 +178,18 @@ These wireframes were created during the planning and design phase of the projec
 ### Admin Adoption of Pet
 ![Admin pet adoption system](../figma/admin_adoption_pet_wireframe.png)
 
+
+# Entity Relationship (ER) Diagram
+This Entity Relationship (ER) Diagram illustrates the database design for my Pet Adoption Management System. The database is intentionally designed to be simple, organized, and scalable while meeting all of the project requirements.
+
+The system consists of three main entities: Users, Pets, and Adoption Requests. The Users table stores information about both adopters and administrators. The Pets table contains details of all pets available for adoption, including their status. The Adoption Requests table acts as a bridge between users and pets by recording each adoption application and its current status.
+
+The relationships shown in the diagram demonstrate that one user can submit multiple adoption requests, and one pet can receive multiple adoption requests, although only one request can be approved for a pet at a time. This design supports the complete adoption workflow while maintaining data integrity through the use of primary keys and foreign keys.
+
+This ER diagram provides the foundation for the SQLite database and will be implemented using SQLAlchemy in the Flask application during the development phase.
+
+## Why did I choose only three tables?
+I chose three core entities because they are sufficient to support all of the required project features, including user authentication, pet management, and adoption requests. This keeps the database simple, normalized, and easy to maintain while satisfying the project scope. Additional tables could be added in the future if the system needed more advanced features.
+
+### Entity Relationship (ER) Diagram
+![Entity Relationship (ER) system](../er-diagram/ER_database_design.png)

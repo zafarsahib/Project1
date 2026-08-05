@@ -1,5 +1,6 @@
 from flask import (
     Flask,
+    jsonify,
     render_template,
     request,
     redirect,
@@ -245,6 +246,22 @@ def dashboard():
 
     return render_template(
         "dashboard.html"
+    )
+
+@app.route("/api/pets")
+@login_required
+def get_pets():
+
+    pets = Pet.query.order_by(
+        Pet.name
+    ).all()
+
+
+    return jsonify(
+        [
+            pet.to_dict()
+            for pet in pets
+        ]
     )
 
 @app.route(

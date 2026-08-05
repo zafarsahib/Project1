@@ -74,6 +74,19 @@ class User(
         )
 
 
+    def to_dict(self):
+
+        return {
+
+            "id": self.id,
+
+            "username": self.username,
+
+            "email": self.email
+
+        }
+
+
 class Pet(db.Model):
 
     __tablename__ = "pets"
@@ -139,3 +152,30 @@ class Pet(db.Model):
         db.ForeignKey("users.id"),
         nullable=False
     )
+
+
+    def to_dict(self):
+
+        return {
+
+            "id": self.id,
+
+            "name": self.name,
+
+            "species": self.species,
+
+            "breed": self.breed,
+
+            "age": self.age,
+
+            "gender": self.gender,
+
+            "description": self.description,
+
+            "status": self.status,
+
+            "image": self.image,
+
+            "user_id": self.user_id
+
+        }

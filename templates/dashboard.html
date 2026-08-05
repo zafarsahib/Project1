@@ -6,7 +6,6 @@ Dashboard
 
 {% endblock %}
 
-
 {% block content %}
 
 <h1 class="mb-4">
@@ -15,7 +14,6 @@ Dashboard
 
 </h1>
 
-
 <p class="lead">
 
     Welcome,
@@ -23,34 +21,102 @@ Dashboard
 
 </p>
 
+<div class="row">
 
-<div class="card">
+    <div class="col-md-6 mb-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+
+                    Account Information
+
+                </h5>
+
+                <p>
+
+                    <strong>Username:</strong>
+                    {{ current_user.username }}
+
+                </p>
+
+                <p>
+
+                    <strong>Email:</strong>
+                    {{ current_user.email }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+
+                    Quick Actions
+
+                </h5>
+
+                <a
+                    href="#"
+                    class="btn btn-primary mb-2 w-100"
+                >
+
+                    Browse Pets
+
+                </a>
+
+                <a
+                    href="#"
+                    class="btn btn-outline-primary w-100"
+                >
+
+                    My Adoption Requests
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
 
     <div class="card-body">
 
         <h5 class="card-title">
 
-            Account Information
+            Project Status
 
         </h5>
 
         <p>
 
-            Username:
-            {{ current_user.username }}
+            Authentication has been completed successfully.
 
         </p>
 
         <p>
 
-            Email:
-            {{ current_user.email }}
+            Pet management features will be added during the next sprint.
 
         </p>
 
     </div>
 
 </div>
-
 
 {% endblock %}

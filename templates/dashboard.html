@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Dashboard
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="mb-4">
+
+    User Dashboard
+
+</h1>
+
+
+<p class="lead">
+
+    Welcome,
+    <strong>{{ current_user.username }}</strong>
+
+</p>
+
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+
+            Account Information
+
+        </h5>
+
+        <p>
+
+            Username:
+            {{ current_user.username }}
+
+        </p>
+
+        <p>
+
+            Email:
+            {{ current_user.email }}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

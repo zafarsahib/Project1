@@ -1,6 +1,5 @@
 from flask import (
     Flask,
-    jsonify,
     render_template,
     request,
     redirect,
@@ -16,6 +15,8 @@ from flask_login import (
     current_user
 )
 
+from functools import wraps
+
 from models import (
     db,
     User,
@@ -25,31 +26,77 @@ from models import (
 
 app = Flask(__name__)
 
+
 app.config["SECRET_KEY"] = "mysecretkey"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///pet_adoption.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///pet_adoption.db"
+)
+
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-db.init_app(app)
+db.init_app(
+    app
+)
 
 
 login_manager = LoginManager()
 
-login_manager.init_app(app)
+
+login_manager.init_app(
+    app
+)
+
 
 login_manager.login_view = "login"
 
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(
+    user_id
+):
 
     return db.session.get(
         User,
         int(user_id)
     )
+
+
+
+def admin_required(function):
+
+    @wraps(function)
+
+    @login_required
+    def wrapper(
+        *args,
+        **kwargs
+    ):
+
+        if current_user.role != "Admin":
+
+            flash(
+                "Admin access required."
+            )
+
+            return redirect(
+                url_for(
+                    "dashboard"
+                )
+            )
+
+
+        return function(
+            *args,
+            **kwargs
+        )
+
+
+    return wrapper
 
 
 
@@ -100,6 +147,7 @@ def register():
                 "All fields are required."
             )
 
+
             return render_template(
                 "register.html"
             )
@@ -115,6 +163,7 @@ def register():
             flash(
                 "Username already exists."
             )
+
 
             return render_template(
                 "register.html"
@@ -132,6 +181,7 @@ def register():
                 "Email already exists."
             )
 
+
             return render_template(
                 "register.html"
             )
@@ -141,7 +191,9 @@ def register():
 
             username=username,
 
-            email=email
+            email=email,
+
+            role="User"
 
         )
 
@@ -211,10 +263,10 @@ def login():
                 "Invalid username or password."
             )
 
+
             return render_template(
                 "login.html"
             )
-
 
 
         login_user(
@@ -225,6 +277,15 @@ def login():
         flash(
             "Logged in successfully."
         )
+
+
+        if user.role == "Admin":
+
+            return redirect(
+                url_for(
+                    "admin_dashboard"
+                )
+            )
 
 
         return redirect(
@@ -238,6 +299,8 @@ def login():
         "login.html"
     )
 
+
+
 @app.route(
     "/dashboard"
 )
@@ -248,21 +311,19 @@ def dashboard():
         "dashboard.html"
     )
 
-@app.route("/api/pets")
-@login_required
-def get_pets():
-
-    pets = Pet.query.order_by(
-        Pet.name
-    ).all()
 
 
-    return jsonify(
-        [
-            pet.to_dict()
-            for pet in pets
-        ]
+@app.route(
+    "/admin"
+)
+@admin_required
+def admin_dashboard():
+
+    return render_template(
+        "admin_dashboard.html"
     )
+
+
 
 @app.route(
     "/logout",
@@ -284,6 +345,8 @@ def logout():
             "home"
         )
     )
+
+
 
 if __name__ == "__main__":
 

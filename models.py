@@ -45,6 +45,13 @@ class User(
     )
 
 
+    role = db.Column(
+        db.String(20),
+        nullable=False,
+        default="User"
+    )
+
+
     pets = db.relationship(
         "Pet",
         backref="owner",
@@ -74,7 +81,9 @@ class User(
         )
 
 
-    def to_dict(self):
+    def to_dict(
+        self
+    ):
 
         return {
 
@@ -82,7 +91,9 @@ class User(
 
             "username": self.username,
 
-            "email": self.email
+            "email": self.email,
+
+            "role": self.role
 
         }
 
@@ -154,7 +165,9 @@ class Pet(db.Model):
     )
 
 
-    def to_dict(self):
+    def to_dict(
+        self
+    ):
 
         return {
 

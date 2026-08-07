@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Admin Dashboard
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1 class="display-4">
+
+Admin Dashboard
+
+</h1>
+
+
+<p class="lead">
+
+Welcome,
+<strong>{{ current_user.username }}</strong>
+
+</p>
+
+
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h4>
+            Administration Area
+        </h4>
+
+
+        <p>
+            Here you can manage pets,
+            adoption requests, and users.
+        </p>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Pet - Pet Adoption
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <h1 class="fw-bold">Edit Pet</h1>
+                <p class="text-muted mb-0">
+                    Update the pet information below.
+                </p>
+            </div>
+
+            <div class="card border-success shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label
+                                    for="name"
+                                    class="form-label fw-semibold"
+                                >
+                                    Pet Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    value="{{ pet.name }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label
+                                    for="species"
+                                    class="form-label fw-semibold"
+                                >
+                                    Species
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="species"
+                                    name="species"
+                                    required
+                                >
+                                    <option value="">
+                                        Select species
+                                    </option>
+
+                                    <option
+                                        value="Dog"
+                                        {% if pet.species == "Dog" %}selected{% endif %}
+                                    >
+                                        Dog
+                                    </option>
+
+                                    <option
+                                        value="Cat"
+                                        {% if pet.species == "Cat" %}selected{% endif %}
+                                    >
+                                        Cat
+                                    </option>
+
+                                    <option
+                                        value="Rabbit"
+                                        {% if pet.species == "Rabbit" %}selected{% endif %}
+                                    >
+                                        Rabbit
+                                    </option>
+
+                                    <option
+                                        value="Goat"
+                                        {% if pet.species == "Goat" %}selected{% endif %}
+                                    >
+                                        Goat
+                                    </option>
+
+                                    <option
+                                        value="Other"
+                                        {% if pet.species == "Other" %}selected{% endif %}
+                                    >
+                                        Other
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label
+                                    for="breed"
+                                    class="form-label fw-semibold"
+                                >
+                                    Breed
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="breed"
+                                    name="breed"
+                                    value="{{ pet.breed }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label
+                                    for="age"
+                                    class="form-label fw-semibold"
+                                >
+                                    Age
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="age"
+                                    name="age"
+                                    value="{{ pet.age }}"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label
+                                for="gender"
+                                class="form-label fw-semibold"
+                            >
+                                Gender
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="gender"
+                                name="gender"
+                                required
+                            >
+                                <option value="">
+                                    Select gender
+                                </option>
+
+                                <option
+                                    value="Male"
+                                    {% if pet.gender == "Male" %}selected{% endif %}
+                                >
+                                    Male
+                                </option>
+
+                                <option
+                                    value="Female"
+                                    {% if pet.gender == "Female" %}selected{% endif %}
+                                >
+                                    Female
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label
+                                for="description"
+                                class="form-label fw-semibold"
+                            >
+                                Description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                name="description"
+                                rows="4"
+                            >{{ pet.description or "" }}</textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label
+                                for="image"
+                                class="form-label fw-semibold"
+                            >
+                                Image File Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="image"
+                                name="image"
+                                value="{{ pet.image or "" }}"
+                                placeholder="example.jpg"
+                            >
+
+                            <div class="form-text">
+                                Store the image in static/images.
+                            </div>
+                        </div>
+
+                        <div class="alert alert-light border">
+                            <strong>Current Status:</strong>
+                            {{ pet.status }}
+
+                            <div class="small text-muted mt-1">
+                                Pet status is controlled by the adoption workflow
+                                and cannot be changed here.
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                            >
+                                Save Changes
+                            </button>
+
+                            <a
+                                href="{{ url_for('manage_pets') }}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

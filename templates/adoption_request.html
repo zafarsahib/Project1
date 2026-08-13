@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Adoption Request - Pet Adoption
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <h1 class="fw-bold">Adoption Request</h1>
+                <p class="text-muted">Submit your request to adopt this pet.</p>
+            </div>
+
+            <div class="card border-success shadow-sm">
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <h4 class="fw-bold mb-2">{{ pet.name }}</h4>
+                        <p class="mb-1">
+                            <strong>Species:</strong> {{ pet.species }}
+                        </p>
+                        <p class="mb-1">
+                            <strong>Breed:</strong> {{ pet.breed }}
+                        </p>
+                        <p class="mb-0">
+                            <strong>Status:</strong>
+                            <span class="badge text-bg-success">{{ pet.status }}</span>
+                        </p>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold">Applicant Information</h5>
+                        <p class="mb-1">
+                            <strong>Username:</strong> {{ current_user.username }}
+                        </p>
+                        <p class="mb-0">
+                            <strong>Email:</strong> {{ current_user.email }}
+                        </p>
+                    </div>
+
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label for="comments" class="form-label fw-semibold">
+                                Why would you like to adopt {{ pet.name }}?
+                            </label>
+                            <textarea
+                                class="form-control"
+                                id="comments"
+                                name="comments"
+                                rows="5"
+                                placeholder="Tell us a little about why you would like to adopt this pet."
+                            ></textarea>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                            >
+                                Submit Adoption Request
+                            </button>
+
+                            <a
+                                href="{{ url_for('pet_details', pet_id=pet.id) }}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Back to Pet
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

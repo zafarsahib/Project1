@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}
+Browse Pets - Pet Adoption
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <h1 class="browse-title">Browse Pets</h1>
+        <p class="browse-subtitle">Find your new best friend.</p>
+    </div>
+
+    <form method="GET" action="{{ url_for('browse_pets') }}" class="mb-4">
+        <div class="row g-3 align-items-center">
+
+            <div class="col-lg-3">
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search pets by name..."
+                    value="{{ search }}"
+                >
+            </div>
+
+            <div class="col-lg-2">
+                <select name="species" class="form-select">
+                    <option value="">All Species</option>
+                    <option value="Dog" {% if species == "Dog" %}selected{% endif %}>Dog</option>
+                    <option value="Cat" {% if species == "Cat" %}selected{% endif %}>Cat</option>
+                    <option value="Rabbit" {% if species == "Rabbit" %}selected{% endif %}>Rabbit</option>
+                    <option value="Goat" {% if species == "Goat" %}selected{% endif %}>Goat</option>
+                    <option value="Other" {% if species == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="col-lg-2">
+                <select name="age" class="form-select">
+                    <option value="">All Ages</option>
+                    <option value="under1" {% if age == "under1" %}selected{% endif %}>Under 1 Year</option>
+                    <option value="1to3" {% if age == "1to3" %}selected{% endif %}>1 - 3 Years</option>
+                    <option value="4plus" {% if age == "4plus" %}selected{% endif %}>4+ Years</option>
+                </select>
+            </div>
+
+            <div class="col-lg-2">
+                <select name="status" class="form-select">
+                    <option value="">All Status</option>
+                    <option value="Available" {% if status == "Available" %}selected{% endif %}>Available</option>
+                    <option value="Adoption Pending" {% if status == "Adoption Pending" %}selected{% endif %}>Adoption Pending</option>
+                    <option value="Adopted" {% if status == "Adopted" %}selected{% endif %}>Adopted</option>
+                </select>
+            </div>
+
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-browse-search w-100">
+                    Search
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="row g-4">
+
+        {% for pet in pets %}
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card pet-browse-card h-100">
+
+                <div class="pet-browse-image-container">
+
+                    {% if pet.image %}
+                    <img
+                        src="{{ url_for('static', filename='images/' + pet.image) }}"
+                        alt="{{ pet.name }}"
+                        class="card-img-top pet-browse-image"
+                    >
+                    {% else %}
+                    <div class="pet-image-placeholder">
+                        No Image
+                    </div>
+                    {% endif %}
+
+                    <span class="badge pet-status-badge">
+                        {{ pet.status }}
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="card-title pet-browse-name">
+                        {{ pet.name }}
+                    </h5>
+
+                    <p class="card-text pet-browse-info">
+                        {{ pet.species }} &nbsp; • &nbsp; {{ pet.age }} Years &nbsp; • &nbsp; {{ pet.gender }}
+                    </p>
+
+                    <a
+                        href="{{ url_for('pet_details', pet_id=pet.id) }}"
+                        class="btn btn-pet-details w-100"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+            <div class="alert alert-light text-center border">
+                No pets found matching your search.
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% if pagination.pages > 1 %}
+
+    <nav aria-label="Pet pages" class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                {% if pagination.has_prev %}
+                <a
+                    class="page-link"
+                    href="{{ url_for('browse_pets', page=pagination.prev_num, search=search, species=species, age=age, status=status) }}"
+                >
+                    Previous
+                </a>
+                {% else %}
+                <span class="page-link">
+                    Previous
+                </span>
+                {% endif %}
+            </li>
+
+            {% for page_num in pagination.iter_pages() %}
+
+                {% if page_num %}
+
+                    {% if page_num == pagination.page %}
+
+                    <li class="page-item active">
+                        <span class="page-link">
+                            {{ page_num }}
+                        </span>
+                    </li>
+
+                    {% else %}
+
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            href="{{ url_for('browse_pets', page=page_num, search=search, species=species, age=age, status=status) }}"
+                        >
+                            {{ page_num }}
+                        </a>
+                    </li>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            ...
+                        </span>
+                    </li>
+
+                {% endif %}
+
+            {% endfor %}
+
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                {% if pagination.has_next %}
+                <a
+                    class="page-link"
+                    href="{{ url_for('browse_pets', page=pagination.next_num, search=search, species=species, age=age, status=status) }}"
+                >
+                    Next
+                </a>
+                {% else %}
+                <span class="page-link">
+                    Next
+                </span>
+                {% endif %}
+            </li>
+
+        </ul>
+    </nav>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

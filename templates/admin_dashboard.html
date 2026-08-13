@@ -1,48 +1,154 @@
 {% extends "base.html" %}
 
-
 {% block title %}
-
 Admin Dashboard
-
 {% endblock %}
-
-
 
 {% block content %}
 
-<h1 class="display-4">
-
-Admin Dashboard
-
-</h1>
-
-
-<p class="lead">
-
-Welcome,
-<strong>{{ current_user.username }}</strong>
-
-</p>
-
-
-<div class="card shadow mt-4">
-
-    <div class="card-body">
-
-        <h4>
-            Administration Area
-        </h4>
-
-
-        <p>
-            Here you can manage pets,
-            adoption requests, and users.
+<div class="container py-5">
+    <div class="mb-4">
+        <h1 class="fw-bold">Admin Dashboard</h1>
+        <p class="text-muted mb-0">
+            Welcome, {{ current_user.username }}
         </p>
-
     </div>
 
-</div>
+    <div class="card border-success shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="fw-bold">
+                Administration Area
+            </h4>
+            <p class="mb-0">
+                Here you can manage pets, adoption requests, and users.
+            </p>
+        <div class="mt-3 d-flex gap-2">
+            <a
+                href="{{ url_for('add_pet') }}"
+                class="btn btn-success"
+            >
+                Add New Pet
+            </a>
 
+            <a
+                href="{{ url_for('manage_pets') }}"
+                class="btn btn-outline-success"
+            >
+                Manage Pets
+            </a>
+
+            <a
+                href="{{ url_for('manage_users') }}"
+                class="btn btn-outline-success"
+            >
+                Manage Users
+            </a>
+        </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">
+                Pending Adoption Requests
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            {% if adoption_requests %}
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Applicant</th>
+                                <th>Request Date</th>
+                                <th>Status</th>
+                                <th>Comments</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for adoption_request in adoption_requests %}
+
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            {{ adoption_request.pet.name }}
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        {{ adoption_request.user.username }}
+                                    </td>
+
+                                    <td>
+                                        {{ adoption_request.request_date.strftime("%Y-%m-%d") }}
+                                    </td>
+
+                                    <td>
+                                        <span class="badge text-bg-warning">
+                                            {{ adoption_request.status }}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        {{ adoption_request.comments or "No comments" }}
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex gap-2">
+
+                                            <form
+                                                method="POST"
+                                                action="{{ url_for('approve_adoption', request_id=adoption_request.id) }}"
+                                            >
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-success btn-sm"
+                                                >
+                                                    Approve
+                                                </button>
+                                            </form>
+
+                                            <form
+                                                method="POST"
+                                                action="{{ url_for('reject_adoption', request_id=adoption_request.id) }}"
+                                            >
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-outline-danger btn-sm"
+                                                >
+                                                    Reject
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-4">
+                    <p class="text-muted mb-0">
+                        There are no pending adoption requests.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}

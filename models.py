@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import UserMixin
@@ -191,4 +193,64 @@ class Pet(db.Model):
 
             "user_id": self.user_id
 
+        }
+
+class AdoptionRequest(db.Model):
+    __tablename__ = "adoption_requests"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("users.id"),
+        nullable=False
+    )
+
+    pet_id = db.Column(
+        db.Integer,
+        db.ForeignKey("pets.id"),
+        nullable=False
+    )
+
+    request_date = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    status = db.Column(
+        db.String(15),
+        nullable=False,
+        default="Pending"
+    )
+
+    comments = db.Column(
+        db.Text,
+        nullable=True
+    )
+
+    user = db.relationship(
+        "User",
+        backref="adoption_requests"
+    )
+
+    pet = db.relationship(
+        "Pet",
+        backref="adoption_requests"
+    )
+
+    def to_dict(
+        self
+    ):
+
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "pet_id": self.pet_id,
+            "request_date": self.request_date,
+            "status": self.status,
+            "comments": self.comments
         }

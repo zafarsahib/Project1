@@ -1,0 +1,827 @@
+/* ========================================
+   General Page Styling
+======================================== */
+
+body {
+    background-color: #ffffff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    min-height: 65vh;
+}
+
+
+/* ========================================
+   Navbar
+======================================== */
+
+.navbar {
+    min-height: 68px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+
+/* Logo */
+
+.brand-logo {
+    width: 60px;
+    height: 60px;
+
+    object-fit: contain;
+
+    margin-right: 12px;
+}
+
+
+/* Website Name */
+
+.brand-name {
+    font-size: 16px;
+    line-height: 1.15;
+    font-weight: 600;
+    color: #171717;
+}
+
+
+/* Navigation Links */
+
+.nav-link {
+    color: #171717 !important;
+    font-size: 14px;
+    font-weight: 500;
+
+    margin-left: 13px;
+    margin-right: 13px;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.nav-link:hover {
+    color: #555 !important;
+}
+
+
+/* Active Home Link */
+
+.nav-link.active {
+    border-bottom: 1px solid #171717;
+}
+
+
+/* Login / Register Buttons */
+
+.nav-button {
+    min-width: 84px;
+    height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* Small X icon inside buttons */
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+
+    border: 1px solid #777;
+    border-radius: 50%;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 7px;
+
+    font-size: 15px;
+    line-height: 1;
+}
+
+.button-icon-dark {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+
+/* ========================================
+   Footer
+======================================== */
+
+footer {
+    background-color: #ffffff;
+}
+
+
+/* ========================================
+   Responsive Navbar
+======================================== */
+
+@media (max-width: 991px) {
+
+    .navbar-nav {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .nav-link {
+        margin: 6px 0;
+    }
+
+    .nav-button {
+        margin-top: 5px;
+    }
+
+}
+
+/* ========================================
+   HOME PAGE
+======================================== */
+
+
+/* ----------------------------------------
+   Hero Section
+---------------------------------------- */
+
+.hero-section {
+    background-color: #fbfaf5;
+    padding: 55px 0;
+    border-bottom: 3px solid #8caf78;
+}
+
+.hero-content {
+    padding-right: 30px;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    background-color: #eaf4dc;
+    color: #285c32;
+
+    padding: 7px 15px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+}
+
+.hero-title {
+    color: #164d2b;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 3.5rem;
+    font-weight: 700;
+
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+}
+
+.hero-text {
+    max-width: 540px;
+
+    color: #414141;
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+}
+
+
+/* Hero Image */
+
+.hero-image-container {
+    height: 360px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    border: 2px solid #9ab889;
+
+    background-color: #edf4e8;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ----------------------------------------
+   Buttons
+---------------------------------------- */
+
+.btn-primary-green {
+    background-color: #176b35;
+    border: 1px solid #176b35;
+
+    color: white;
+
+    padding: 10px 25px;
+
+    border-radius: 5px;
+
+    font-weight: 600;
+}
+
+.btn-primary-green:hover {
+    background-color: #0f5227;
+    border-color: #0f5227;
+    color: white;
+}
+
+.btn-outline-green {
+    background-color: white;
+
+    border: 1px solid #6f9b6d;
+
+    color: #245b32;
+
+    padding: 10px 22px;
+
+    border-radius: 5px;
+
+    font-weight: 600;
+}
+
+.btn-outline-green:hover {
+    background-color: #edf6e9;
+    border-color: #4f7d50;
+    color: #164d2b;
+}
+
+
+/* ----------------------------------------
+   Search Section
+---------------------------------------- */
+
+.search-section {
+    background-color: #ffffff;
+
+    padding: 25px 0;
+
+    border-bottom: 1px solid #dce7d7;
+}
+
+.search-box {
+    padding: 18px;
+
+    border: 1px solid #b5cbb0;
+
+    border-radius: 8px;
+
+    background-color: #ffffff;
+
+    box-shadow: 0 2px 8px rgba(36, 91, 50, 0.06);
+}
+
+.search-input {
+    height: 44px;
+
+    border: 1px solid #b8c9b4;
+
+    border-radius: 5px;
+
+    color: #333;
+}
+
+.search-input:focus {
+    border-color: #6f9b6d;
+
+    box-shadow: 0 0 0 0.15rem rgba(76, 125, 80, 0.12);
+}
+
+.btn-search {
+    height: 44px;
+
+    background-color: #176b35;
+
+    border: 1px solid #176b35;
+
+    color: white;
+
+    border-radius: 5px;
+
+    font-weight: 600;
+}
+
+.btn-search:hover {
+    background-color: #0f5227;
+    color: white;
+}
+
+
+/* ----------------------------------------
+   Featured Pets
+---------------------------------------- */
+
+.featured-section {
+    background-color: #ffffff;
+
+    padding: 45px 0;
+}
+
+.section-heading-row {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.section-title {
+    color: #164d2b;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 2rem;
+    font-weight: 700;
+
+    margin: 0;
+}
+
+
+/* Pet Card */
+
+.pet-card {
+    background-color: #ffffff;
+
+    border: 1px solid #d6e2d2;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    height: 100%;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 6px 18px rgba(36, 91, 50, 0.12);
+}
+
+
+/* Pet Image */
+
+.pet-image-container {
+    height: 190px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background-color: #edf4e8;
+}
+
+.pet-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.availability-badge {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    background-color: #f5faef;
+
+    border: 1px solid #7da276;
+
+    color: #245b32;
+
+    padding: 4px 9px;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Pet Card Body */
+
+.pet-card-body {
+    padding: 15px;
+}
+
+.pet-name {
+    color: #1c1c1c;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.pet-info {
+    color: #555;
+
+    font-size: 13px;
+
+    margin-bottom: 14px;
+}
+
+.btn-pet-details {
+    width: 100%;
+
+    background-color: white;
+
+    border: 1px solid #7da276;
+
+    color: #245b32;
+
+    padding: 8px;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-pet-details:hover {
+    background-color: #edf6e9;
+
+    color: #164d2b;
+
+    border-color: #527b52;
+}
+
+
+/* ----------------------------------------
+   Benefits
+---------------------------------------- */
+
+.benefits-section {
+    background-color: #fbfaf5;
+
+    border-top: 1px solid #dce7d7;
+
+    border-bottom: 1px solid #dce7d7;
+
+    padding: 30px 0;
+}
+
+.benefit-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    height: 100%;
+}
+
+.benefit-icon {
+    min-width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background-color: #eaf4dc;
+
+    border: 1px solid #c9ddbd;
+
+    color: #176b35;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.benefit-item h3 {
+    color: #1d1d1d;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.benefit-item p {
+    color: #555;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    margin: 0;
+}
+
+
+/* ----------------------------------------
+   Home Page Responsive Design
+---------------------------------------- */
+
+@media (max-width: 991px) {
+
+    .hero-section {
+        padding: 40px 0;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-content {
+        padding-right: 0;
+    }
+
+    .hero-image-container {
+        height: 300px;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-image-container {
+        height: 260px;
+    }
+
+    .section-heading-row {
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .benefit-item {
+        align-items: flex-start;
+    }
+
+}
+
+/* ========================================
+   BROWSE PETS PAGE
+======================================== */
+
+.browse-title {
+    color: #164d2b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.browse-subtitle {
+    color: #555;
+    font-size: 17px;
+    margin-bottom: 0;
+}
+
+.form-control,
+.form-select {
+    border-color: #b8c9b4;
+    border-radius: 5px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #6f9b6d;
+    box-shadow: 0 0 0 0.15rem rgba(76, 125, 80, 0.12);
+}
+
+.btn-browse-search {
+    background-color: #176b35;
+    border-color: #176b35;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.btn-browse-search:hover {
+    background-color: #0f5227;
+    border-color: #0f5227;
+    color: #ffffff;
+}
+
+.pet-browse-card {
+    border: 1px solid #d6e2d2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.pet-browse-image-container {
+    height: 210px;
+    position: relative;
+    overflow: hidden;
+    background-color: #edf4e8;
+}
+
+.pet-browse-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-image-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    background-color: #f5f7f3;
+}
+
+.pet-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #7da276;
+    color: #245b32;
+    font-weight: 600;
+}
+
+.pet-browse-name {
+    color: #1c1c1c;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pet-browse-info {
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.pagination .page-link {
+    color: #245b32;
+    border-color: #b8c9b4;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #176b35;
+    border-color: #176b35;
+    color: #ffffff;
+}
+
+.pagination .page-link:hover {
+    background-color: #edf6e9;
+    color: #164d2b;
+}
+
+/* ========================================
+   PET DETAILS PAGE
+======================================== */
+
+.pet-detail-main-image {
+    height: 430px;
+    overflow: hidden;
+    border: 1px solid #d6e2d2;
+    border-radius: 8px;
+    background-color: #f5f7f3;
+}
+
+.pet-detail-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-detail-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+.pet-detail-thumbnail {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #d6e2d2;
+    border-radius: 5px;
+}
+
+.pet-detail-name {
+    color: #164d2b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.pet-detail-status {
+    background-color: #ffffff;
+    border: 1px solid #7da276;
+    color: #245b32;
+    font-weight: 600;
+}
+
+.pet-detail-summary {
+    color: #555;
+    margin-bottom: 0;
+}
+
+.pet-detail-description {
+    line-height: 1.7;
+    color: #444;
+}
+
+.btn-adopt-now {
+    background-color: #176b35;
+    border-color: #176b35;
+    color: #ffffff;
+    font-weight: 600;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-adopt-now:hover {
+    background-color: #0f5227;
+    border-color: #0f5227;
+    color: #ffffff;
+}
+
+.pet-detail-feature {
+    border: 1px solid #d6e2d2;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pet-detail-feature strong {
+    font-size: 14px;
+}
+
+.pet-detail-feature span {
+    color: #555;
+    font-size: 13px;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.site-footer {
+    background-color: #164d2b;
+    color: #ffffff;
+}
+
+.footer-title {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-text {
+    color: #dce9df;
+}

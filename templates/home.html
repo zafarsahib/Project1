@@ -7,7 +7,7 @@ Home - Pet Adoption
 {% block content %}
 
 <!-- =========================================
-     HERO SECTION
+HERO SECTION
 ========================================= -->
 
 <section class="hero-section" id="home">
@@ -57,11 +57,9 @@ Home - Pet Adoption
             <div class="col-lg-6">
                 <div class="hero-image-container">
 
-                    <img
-                        src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1000&q=80"
-                        alt="Happy dog"
-                        class="hero-image"
-                    >
+                    <img src="{{ url_for('static', filename='images/peacock.png') }}"
+                        alt="Beautiful peacock"
+                        class="img-fluid rounded">
 
                 </div>
             </div>

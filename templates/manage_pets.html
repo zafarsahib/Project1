@@ -7,6 +7,7 @@ Manage Pets - Pet Adoption
 {% block content %}
 
 <div class="container py-5">
+
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold">Manage Pets</h1>
@@ -24,6 +25,7 @@ Manage Pets - Pet Adoption
     </div>
 
     <div class="card border-success shadow-sm">
+
         <div class="card-header bg-success text-white">
             <h4 class="mb-0">
                 Pet List
@@ -35,7 +37,9 @@ Manage Pets - Pet Adoption
             {% if pets %}
 
                 <div class="table-responsive">
+
                     <table class="table table-hover align-middle">
+
                         <thead>
                             <tr>
                                 <th>Pet</th>
@@ -44,6 +48,7 @@ Manage Pets - Pet Adoption
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Status</th>
+                                <th>Adopted By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -53,6 +58,7 @@ Manage Pets - Pet Adoption
                             {% for pet in pets %}
 
                                 <tr>
+
                                     <td>
                                         <strong>
                                             {{ pet.name }}
@@ -77,23 +83,40 @@ Manage Pets - Pet Adoption
 
                                     <td>
                                         {% if pet.status == "Available" %}
+
                                             <span class="badge text-bg-success">
                                                 Available
                                             </span>
+
                                         {% elif pet.status == "Adoption Pending" %}
+
                                             <span class="badge text-bg-warning">
                                                 Adoption Pending
                                             </span>
+
                                         {% elif pet.status == "Adopted" %}
+
                                             <span class="badge text-bg-secondary">
                                                 Adopted
                                             </span>
+
                                         {% else %}
+
                                             <span class="badge text-bg-secondary">
                                                 {{ pet.status }}
                                             </span>
+
                                         {% endif %}
                                     </td>
+
+                                    <td>
+                                        {% if pet.status == "Adopted" and pet.id in adopted_by %}
+                                            <strong>
+                                                {{ adopted_by[pet.id] }}
+                                            </strong>
+                                        {% endif %}
+                                    </td>
+
                                     <td>
                                         <div class="d-flex gap-2">
 
@@ -123,17 +146,21 @@ Manage Pets - Pet Adoption
 
                                         </div>
                                     </td>
+
                                 </tr>
 
                             {% endfor %}
 
                         </tbody>
+
                     </table>
+
                 </div>
 
             {% else %}
 
                 <div class="text-center py-4">
+
                     <p class="text-muted mb-3">
                         No pets have been added yet.
                     </p>
@@ -144,6 +171,7 @@ Manage Pets - Pet Adoption
                     >
                         Add New Pet
                     </a>
+
                 </div>
 
             {% endif %}
@@ -152,13 +180,16 @@ Manage Pets - Pet Adoption
     </div>
 
     <div class="mt-4">
+
         <a
             href="{{ url_for('admin_dashboard') }}"
             class="btn btn-outline-secondary"
         >
             Back to Admin Dashboard
         </a>
+
     </div>
+
 </div>
 
 {% endblock %}

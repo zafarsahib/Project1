@@ -205,9 +205,20 @@ def pet_details(
             )
         )
 
+    user_request = None
+
+    if current_user.is_authenticated:
+        user_request = AdoptionRequest.query.filter_by(
+            user_id=current_user.id,
+            pet_id=pet.id
+        ).order_by(
+            AdoptionRequest.id.desc()
+        ).first()
+
     return render_template(
         "pet_details.html",
-        pet=pet
+        pet=pet,
+        user_request=user_request
     )
 
 
@@ -235,9 +246,9 @@ def adopt_pet(
             )
         )
 
-    if pet.status == "Adoption Pending":
+    if current_user.role == "Admin":
         flash(
-            "This pet already has an adoption request under review."
+            "Administrators cannot submit adoption requests."
         )
 
         return redirect(
@@ -251,6 +262,32 @@ def adopt_pet(
         flash(
             "This pet has already been adopted."
         )
+
+        return redirect(
+            url_for(
+                "pet_details",
+                pet_id=pet.id
+            )
+        )
+
+    existing_request = AdoptionRequest.query.filter_by(
+        user_id=current_user.id,
+        pet_id=pet.id
+    ).filter(
+        AdoptionRequest.status.in_(
+            ["Pending", "Approved"]
+        )
+    ).first()
+
+    if existing_request:
+        if existing_request.status == "Pending":
+            flash(
+                "You already have a pending adoption request for this pet."
+            )
+        else:
+            flash(
+                "You have already been approved to adopt this pet."
+            )
 
         return redirect(
             url_for(
@@ -276,8 +313,6 @@ def adopt_pet(
             adoption_request
         )
 
-        pet.status = "Adoption Pending"
-
         db.session.commit()
 
         flash(
@@ -294,7 +329,6 @@ def adopt_pet(
         "adoption_request.html",
         pet=pet
     )
-
 
 @app.route(
     "/register",
@@ -632,9 +666,20 @@ def approve_adoption(
             )
         )
 
+    pet = adoption_request.pet
+
     adoption_request.status = "Approved"
 
-    adoption_request.pet.status = "Adopted"
+    pet.status = "Adopted"
+
+    other_requests = AdoptionRequest.query.filter(
+        AdoptionRequest.pet_id == pet.id,
+        AdoptionRequest.id != adoption_request.id,
+        AdoptionRequest.status == "Pending"
+    ).all()
+
+    for other_request in other_requests:
+        other_request.status = "Rejected"
 
     db.session.commit()
 
@@ -657,9 +702,21 @@ def manage_pets():
         Pet.id.desc()
     ).all()
 
+    adopted_by = {}
+
+    approved_requests = AdoptionRequest.query.filter_by(
+        status="Approved"
+    ).all()
+
+    for adoption_request in approved_requests:
+        adopted_by[adoption_request.pet_id] = (
+            adoption_request.user.username
+        )
+
     return render_template(
         "manage_pets.html",
-        pets=pets
+        pets=pets,
+        adopted_by=adopted_by
     )
 
 @app.route(
@@ -895,8 +952,6 @@ def reject_adoption(
         )
 
     adoption_request.status = "Rejected"
-
-    adoption_request.pet.status = "Available"
 
     db.session.commit()
 

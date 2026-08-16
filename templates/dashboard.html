@@ -10,15 +10,13 @@ Dashboard - Pet Adoption
 
     <!-- Dashboard Header -->
     <div class="mb-5">
-
         <h1 class="display-6 fw-semibold">
             User Dashboard
         </h1>
 
         <p class="lead mb-0">
-            Welcome back!
+            Welcome, {{ current_user.username }}!
         </p>
-
     </div>
 
 
@@ -35,11 +33,6 @@ Dashboard - Pet Adoption
                     <h5 class="card-title mb-4">
                         Account Information
                     </h5>
-
-                    <p class="mb-3">
-                        <strong>Username:</strong>
-                        {{ current_user.username }}
-                    </p>
 
                     <p class="mb-0">
                         <strong>Email:</strong>
@@ -65,8 +58,15 @@ Dashboard - Pet Adoption
                     </h5>
 
                     <a
+                        href="{{ url_for('browse_pets') }}"
+                        class="btn btn-outline-green w-100 mb-2"
+                    >
+                        Browse Available Pets
+                    </a>
+
+                    <a
                         href="#adoption-requests"
-                        class="btn btn-outline-green w-100"
+                        class="btn btn-outline-secondary w-100"
                     >
                         My Adoption Requests
                     </a>
@@ -191,7 +191,7 @@ Dashboard - Pet Adoption
             </h2>
 
             <p class="text-muted mb-0">
-                Track the status of your adoption requests.
+                Track your adoption requests and their current status.
             </p>
 
         </div>
@@ -218,7 +218,11 @@ Dashboard - Pet Adoption
                             </th>
 
                             <th scope="col">
-                                Request Status
+                                Request Date
+                            </th>
+
+                            <th scope="col">
+                                My Request
                             </th>
 
                             <th scope="col">
@@ -239,16 +243,27 @@ Dashboard - Pet Adoption
 
                         <tr>
 
+                            <!-- Pet -->
                             <td>
                                 <strong>
                                     {{ adoption_request.pet.name }}
                                 </strong>
                             </td>
 
+
+                            <!-- Species -->
                             <td>
                                 {{ adoption_request.pet.species }}
                             </td>
 
+
+                            <!-- Request Date -->
+                            <td>
+                                {{ adoption_request.request_date.strftime("%b %d, %Y") }}
+                            </td>
+
+
+                            <!-- My Request Status -->
                             <td>
 
                                 {% if adoption_request.status == "Pending" %}
@@ -279,14 +294,40 @@ Dashboard - Pet Adoption
 
                             </td>
 
+
+                            <!-- Current Pet Status -->
                             <td>
 
-                                <span class="badge pet-status-badge">
+                                {% if adoption_request.pet.status == "Available" %}
+
+                                <span class="badge text-bg-success">
+                                    Available
+                                </span>
+
+                                {% elif adoption_request.pet.status == "Adoption Pending" %}
+
+                                <span class="badge text-bg-warning">
+                                    Adoption Pending
+                                </span>
+
+                                {% elif adoption_request.pet.status == "Adopted" %}
+
+                                <span class="badge text-bg-secondary">
+                                    Adopted
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge text-bg-secondary">
                                     {{ adoption_request.pet.status }}
                                 </span>
 
+                                {% endif %}
+
                             </td>
 
+
+                            <!-- Action -->
                             <td>
 
                                 <a
@@ -312,6 +353,7 @@ Dashboard - Pet Adoption
 
         {% else %}
 
+        <!-- No Requests -->
         <div class="card shadow-sm">
 
             <div class="card-body text-center py-5">

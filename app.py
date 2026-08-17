@@ -102,6 +102,59 @@ def home():
         pets=pets
     )
 
+@app.route("/about")
+def about():
+    return render_template(
+        "about.html"
+    )
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        name = request.form.get(
+            "name",
+            ""
+        ).strip()
+
+        email = request.form.get(
+            "email",
+            ""
+        ).strip()
+
+        subject = request.form.get(
+            "subject",
+            ""
+        ).strip()
+
+        message = request.form.get(
+            "message",
+            ""
+        ).strip()
+
+        if not name or not email or not subject or not message:
+            flash(
+                "Please complete all fields.",
+                "warning"
+            )
+
+            return render_template(
+                "contact.html"
+            )
+
+        flash(
+            "Thank you for contacting us. Your message has been received.",
+            "success"
+        )
+
+        return redirect(
+            url_for(
+                "contact"
+            )
+        )
+
+    return render_template(
+        "contact.html"
+    )
 
 @app.route("/browse-pets")
 def browse_pets():

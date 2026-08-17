@@ -79,17 +79,24 @@
 
                 <!-- About Us -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link"
+                        href="{{ url_for('about') }}"
+                    >
                         About Us
                     </a>
                 </li>
 
                 <!-- Contact -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a
+                        class="nav-link"
+                        href="{{ url_for('contact') }}"
+                    >
                         Contact
                     </a>
                 </li>
+                
     {% if current_user.is_authenticated %}
 
         {% if current_user.role == "Admin" %}

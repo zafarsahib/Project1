@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}
+About Us - Pet Adoption
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+
+        <h1 class="display-6 fw-semibold">
+            About Us
+        </h1>
+
+        <p class="lead text-muted mb-0">
+            Helping pets find loving and responsible homes.
+        </p>
+
+    </div>
+
+
+    <!-- About the System -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <h2 class="h4 mb-3">
+                        Our Pet Adoption System
+                    </h2>
+
+                    <p>
+                        The Pet Adoption Management System is designed
+                        to make the pet adoption process simple,
+                        organized, and accessible.
+                    </p>
+
+                    <p class="mb-0">
+                        Visitors can browse available pets, create an
+                        account, and submit adoption requests.
+                        Administrators can manage pets and review
+                        adoption applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Our Goal -->
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <h2 class="h4 mb-3">
+                        Our Goal
+                    </h2>
+
+                    <p>
+                        Our goal is to provide a clear and user-friendly
+                        platform that connects people with pets that are
+                        looking for new homes.
+                    </p>
+
+                    <p class="mb-0">
+                        The system also helps administrators keep track
+                        of pets and adoption requests throughout the
+                        adoption process.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- How It Works -->
+    <div class="mb-5">
+
+        <div class="text-center mb-4">
+
+            <h2 class="h4">
+                How It Works
+            </h2>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3 class="h5 mb-3">
+                            1. Browse Pets
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Explore the pets available for adoption
+                            and view their details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3 class="h5 mb-3">
+                            2. Submit a Request
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Registered users can submit an adoption
+                            request for a pet they are interested in.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body text-center p-4">
+
+                        <h3 class="h5 mb-3">
+                            3. Find a New Companion
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Administrators review requests and manage
+                            the adoption process.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Browse Pets Button -->
+    <div class="text-center">
+
+        <a
+            href="{{ url_for('browse_pets') }}"
+            class="btn btn-primary-green"
+        >
+            Browse Available Pets
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

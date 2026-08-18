@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}
+Contact Messages - Pet Adoption
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold">
+                Contact Messages
+            </h1>
+
+            <p class="text-muted mb-0">
+                View messages submitted through the Contact Us form.
+            </p>
+        </div>
+
+        <a
+            href="{{ url_for('admin_dashboard') }}"
+            class="btn btn-outline-secondary"
+        >
+            Back to Admin Dashboard
+        </a>
+    </div>
+
+    <div class="card border-success shadow-sm">
+
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">
+                Messages
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            {% if messages %}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for message in messages %}
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    {{ message.name }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ message.email }}
+                            </td>
+
+                            <td>
+                                {{ message.subject }}
+                            </td>
+
+                            <td>
+                                {{ message.message }}
+                            </td>
+
+                            <td>
+                                {{ message.created_at.strftime("%Y-%m-%d %H:%M") }}
+                            </td>
+
+                            <td>
+
+                                {% if message.status == "New" %}
+
+                                    <div class="d-flex align-items-center gap-2">
+
+                                        <span class="badge text-bg-warning">
+                                            New
+                                        </span>
+
+                                        <form
+                                            method="POST"
+                                            action="{{ url_for('mark_contact_message_read', message_id=message.id) }}"
+                                        >
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-outline-success"
+                                            >
+                                                Mark as Read
+                                            </button>
+                                        </form>
+
+                                    </div>
+
+                                {% elif message.status == "Read" %}
+
+                                    <span class="badge text-bg-success">
+                                        Read
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge text-bg-secondary">
+                                        {{ message.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <h5 class="mb-3">
+                    No Contact Messages
+                </h5>
+
+                <p class="text-muted mb-0">
+                    There are currently no messages from users.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

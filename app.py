@@ -22,7 +22,8 @@ from models import (
     db,
     User,
     Pet,
-    AdoptionRequest
+    AdoptionRequest,
+    ContactMessage
 )
 
 
@@ -108,18 +109,13 @@ def about():
         "about.html"
     )
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route(
+    "/contact",
+    methods=["GET", "POST"]
+)
 def contact():
-    if request.method == "POST":
-        name = request.form.get(
-            "name",
-            ""
-        ).strip()
 
-        email = request.form.get(
-            "email",
-            ""
-        ).strip()
+    if request.method == "POST":
 
         subject = request.form.get(
             "subject",
@@ -131,7 +127,28 @@ def contact():
             ""
         ).strip()
 
+        if current_user.is_authenticated:
+
+            user_id = current_user.id
+            name = current_user.username
+            email = current_user.email
+
+        else:
+
+            user_id = None
+
+            name = request.form.get(
+                "name",
+                ""
+            ).strip()
+
+            email = request.form.get(
+                "email",
+                ""
+            ).strip()
+
         if not name or not email or not subject or not message:
+
             flash(
                 "Please complete all fields.",
                 "warning"
@@ -140,6 +157,21 @@ def contact():
             return render_template(
                 "contact.html"
             )
+
+        contact_message = ContactMessage(
+            user_id=user_id,
+            name=name,
+            email=email,
+            subject=subject,
+            message=message,
+            status="New"
+        )
+
+        db.session.add(
+            contact_message
+        )
+
+        db.session.commit()
 
         flash(
             "Thank you for contacting us. Your message has been received.",
@@ -967,6 +999,61 @@ def manage_users():
     return render_template(
         "manage_users.html",
         users=users
+    )
+
+@app.route(
+    "/admin/contact-messages"
+)
+@admin_required
+def admin_contact_messages():
+
+    messages = ContactMessage.query.order_by(
+        ContactMessage.created_at.desc()
+    ).all()
+
+    return render_template(
+        "admin_contact_messages.html",
+        messages=messages
+    )
+
+@app.route(
+    "/admin/contact-messages/read/<int:message_id>",
+    methods=["POST"]
+)
+@admin_required
+def mark_contact_message_read(
+    message_id
+):
+    message = db.session.get(
+        ContactMessage,
+        message_id
+    )
+
+    if message is None:
+        flash(
+            "Contact message not found.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "admin_contact_messages"
+            )
+        )
+
+    message.status = "Read"
+
+    db.session.commit()
+
+    flash(
+        "Contact message marked as read.",
+        "success"
+    )
+
+    return redirect(
+        url_for(
+            "admin_contact_messages"
+        )
     )
 
 @app.route(

@@ -8,76 +8,29 @@ Contact Us - Pet Adoption
 
 <div class="container py-5">
 
-    <!-- Page Header -->
     <div class="text-center mb-5">
-
-        <h1 class="display-6 fw-semibold">
+        <h1 class="fw-bold">
             Contact Us
         </h1>
 
-        <p class="lead text-muted mb-0">
-            Have a question? We would love to hear from you.
+        <p class="text-muted mb-0">
+            Have a question about pet adoption? Send us a message.
         </p>
-
     </div>
 
+    <div class="row justify-content-center">
 
-    <div class="row g-4">
+        <div class="col-lg-8">
 
-        <!-- Contact Information -->
-        <div class="col-lg-5">
+            <div class="card shadow-sm border-success">
 
-            <div class="card shadow-sm h-100">
-
-                <div class="card-body p-4">
-
-                    <h2 class="h4 mb-4">
-                        Get in Touch
-                    </h2>
-
-                    <p class="text-muted">
-                        If you have questions about our pets,
-                        adoption process, or website, please
-                        send us a message using the contact form.
-                    </p>
-
-                    <div class="mt-4">
-
-                        <p class="mb-3">
-                            <strong>Email:</strong><br>
-                            info@petadoption.com
-                        </p>
-
-                        <p class="mb-3">
-                            <strong>Phone:</strong><br>
-                            (000) 000-0000
-                        </p>
-
-                        <p class="mb-0">
-                            <strong>Hours:</strong><br>
-                            Monday - Friday<br>
-                            9:00 AM - 5:00 PM
-                        </p>
-
-                    </div>
-
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        Send Us a Message
+                    </h4>
                 </div>
 
-            </div>
-
-        </div>
-
-
-        <!-- Contact Form -->
-        <div class="col-lg-7">
-
-            <div class="card shadow-sm">
-
                 <div class="card-body p-4">
-
-                    <h2 class="h4 mb-4">
-                        Send Us a Message
-                    </h2>
 
                     <form
                         method="POST"
@@ -94,14 +47,32 @@ Contact Us - Pet Adoption
                                 Name
                             </label>
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="name"
-                                name="name"
-                                placeholder="Enter your name"
-                                required
-                            >
+                            {% if current_user.is_authenticated %}
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    value="{{ current_user.username }}"
+                                    readonly
+                                >
+
+                                <div class="form-text">
+                                    Your name is taken from your account.
+                                </div>
+
+                            {% else %}
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    required
+                                >
+
+                            {% endif %}
 
                         </div>
 
@@ -116,14 +87,32 @@ Contact Us - Pet Adoption
                                 Email
                             </label>
 
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                required
-                            >
+                            {% if current_user.is_authenticated %}
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    value="{{ current_user.email }}"
+                                    readonly
+                                >
+
+                                <div class="form-text">
+                                    Your email is taken from your account.
+                                </div>
+
+                            {% else %}
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    required
+                                >
+
+                            {% endif %}
 
                         </div>
 
@@ -143,7 +132,6 @@ Contact Us - Pet Adoption
                                 class="form-control"
                                 id="subject"
                                 name="subject"
-                                placeholder="Enter subject"
                                 required
                             >
 
@@ -164,8 +152,7 @@ Contact Us - Pet Adoption
                                 class="form-control"
                                 id="message"
                                 name="message"
-                                rows="5"
-                                placeholder="Enter your message"
+                                rows="6"
                                 required
                             ></textarea>
 
@@ -173,12 +160,23 @@ Contact Us - Pet Adoption
 
 
                         <!-- Submit -->
-                        <button
-                            type="submit"
-                            class="btn btn-primary-green"
-                        >
-                            Send Message
-                        </button>
+                        <div class="d-flex gap-2">
+
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                            >
+                                Send Message
+                            </button>
+
+                            <a
+                                href="{{ url_for('home') }}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Cancel
+                            </a>
+
+                        </div>
 
                     </form>
 

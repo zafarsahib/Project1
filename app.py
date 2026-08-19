@@ -602,15 +602,63 @@ def dashboard():
 )
 @admin_required
 def admin_dashboard():
+
     adoption_requests = AdoptionRequest.query.filter_by(
         status="Pending"
     ).order_by(
         AdoptionRequest.request_date.desc()
     ).all()
 
+    total_users = User.query.count()
+
+    total_pets = Pet.query.count()
+
+    available_pets = Pet.query.filter_by(
+        status="Available"
+    ).count()
+
+    pending_pets = Pet.query.filter_by(
+        status="Adoption Pending"
+    ).count()
+
+    adopted_pets = Pet.query.filter_by(
+        status="Adopted"
+    ).count()
+
+    total_requests = AdoptionRequest.query.count()
+
+    pending_requests = AdoptionRequest.query.filter_by(
+        status="Pending"
+    ).count()
+
+    approved_requests = AdoptionRequest.query.filter_by(
+        status="Approved"
+    ).count()
+
+    rejected_requests = AdoptionRequest.query.filter_by(
+        status="Rejected"
+    ).count()
+
+    total_contact_messages = ContactMessage.query.count()
+
+    new_contact_messages = ContactMessage.query.filter_by(
+        status="New"
+    ).count()
+
     return render_template(
         "admin_dashboard.html",
-        adoption_requests=adoption_requests
+        adoption_requests=adoption_requests,
+        total_users=total_users,
+        total_pets=total_pets,
+        available_pets=available_pets,
+        pending_pets=pending_pets,
+        adopted_pets=adopted_pets,
+        total_requests=total_requests,
+        pending_requests=pending_requests,
+        approved_requests=approved_requests,
+        rejected_requests=rejected_requests,
+        total_contact_messages=total_contact_messages,
+        new_contact_messages=new_contact_messages
     )
 
 @app.route(

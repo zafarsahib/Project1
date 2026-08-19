@@ -1002,6 +1002,96 @@ def manage_users():
     )
 
 @app.route(
+    "/admin/users/delete/<int:user_id>",
+    methods=["POST"]
+)
+@admin_required
+def delete_user(
+    user_id
+):
+    user = db.session.get(
+        User,
+        user_id
+    )
+
+    if user is None:
+        flash(
+            "User not found.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "manage_users"
+            )
+        )
+
+    if user.role == "Admin":
+        flash(
+            "Admin users cannot be deleted.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "manage_users"
+            )
+        )
+
+    if user.pets:
+        flash(
+            "This user cannot be deleted because they have pets associated with their account.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "manage_users"
+            )
+        )
+
+    if user.adoption_requests:
+        flash(
+            "This user cannot be deleted because they have adoption request history.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "manage_users"
+            )
+        )
+
+    if user.contact_messages:
+        flash(
+            "This user cannot be deleted because they have contact message history.",
+            "warning"
+        )
+
+        return redirect(
+            url_for(
+                "manage_users"
+            )
+        )
+
+    db.session.delete(
+        user
+    )
+
+    db.session.commit()
+
+    flash(
+        "User deleted successfully.",
+        "success"
+    )
+
+    return redirect(
+        url_for(
+            "manage_users"
+        )
+    )
+
+@app.route(
     "/admin/contact-messages"
 )
 @admin_required
